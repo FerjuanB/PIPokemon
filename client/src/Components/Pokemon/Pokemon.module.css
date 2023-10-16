@@ -1,0 +1,6 @@
+.mainCard{
+    border: 3px solid blue;
+    border-radius: 10px;
+    width: fit-content;
+    height: fit-content;
+}
