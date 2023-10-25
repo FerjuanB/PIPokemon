@@ -1,8 +1,21 @@
-.mCont{
-    border: 1px solid red; 
-    display:flex;
-    flex-direction: row;
+.mCont {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: row; /* Cambiamos de columna a fila */
     border-radius: 5px;
+   
+  }
+  
+  .contPoke {
+    display: flex;
     flex-wrap: wrap;
-    gap:1em;
-}
+    gap: 1em;
+    justify-content: space-around; /* Alineamos las columnas en el centro */
+    width: 50%; /* Aseguramos que ocupe todo el ancho disponible */
+  }
+  
+  .column {
+    width: calc(33.33% - 1em); /* 33.33% width para cada columna con un espacio de 1em */
+    margin-bottom: 1em; /* Añadimos margen inferior entre las filas de cartas */
+  }
+  

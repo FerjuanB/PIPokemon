@@ -1,15 +1,29 @@
-import { Pokemon } from "../Pokemon/Pokemon"
 import style from './PokeContainer.module.css'
-import { useSelector } from "react-redux"
+import { Pokemon } from "../Pokemon/Pokemon"
+import { selectPaginatedPokemons } from '../../Redux/selector'
+import Pagination from "./Pagination/Pagination"
+import {setPage} from '../../Redux/actions'
+import { useDispatch, useSelector } from "react-redux"
 const PokeContainer = () => {
  
-   const pokemons = useSelector(state=>state.pokemons);
+  
+const dispatch = useDispatch();
 
-   
+
+const {page,filteredPoke} = useSelector((state=>state))
+const pokemonsState = useSelector(selectPaginatedPokemons);
+
+const max = Math.ceil(filteredPoke.length / 12)
+const handlePageChange = (newP)=>{
+  dispatch(setPage(newP))
+}
     return (
     <div className={style.mCont}>
-        {pokemons.map(u =>{
-            return <Pokemon 
+     {filteredPoke.length >0  && <div className={style.contPoke}>
+      {pokemonsState
+       .map(u =>
+            <Pokemon 
+            key={u.id}
             id={u.id}
             name={u.name}
             image={u.image}
@@ -20,7 +34,9 @@ const PokeContainer = () => {
             weight={u.weight}
             types={u.types}
             />
-        })}
+        )}
+      </div>}
+    <Pagination page={page} setPage={handlePageChange} total={max}/>
     </div>
   )
 }

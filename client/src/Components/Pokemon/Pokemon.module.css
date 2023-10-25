@@ -1,6 +1,14 @@
-.mainCard{
+.mainCard {
     border: 3px solid blue;
     border-radius: 10px;
-    width: fit-content;
-    height: fit-content;
+    width: 100%; /* Ajustamos el ancho para ocupar todo el espacio disponible en la columna */
+    box-sizing: border-box; /* Aseguramos que el borde no afecte el tamaño total */
+    padding: 10px; /* Añadimos un poco de espacio interno para que no esté pegado al borde */
+    margin-bottom: 1em; /* Añadimos margen en la parte inferior para separar las cartas */
+    justify-content: center;
+}
+  
+img{
+    width: 40%;
+
 }
