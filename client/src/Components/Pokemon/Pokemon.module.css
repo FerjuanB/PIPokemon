@@ -1,14 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
+
+
+
 .mainCard {
-    border: 3px solid blue;
+    
+    background-color: #eee;
     border-radius: 10px;
-    width: 100%; /* Ajustamos el ancho para ocupar todo el espacio disponible en la columna */
-    box-sizing: border-box; /* Aseguramos que el borde no afecte el tamaño total */
-    padding: 10px; /* Añadimos un poco de espacio interno para que no esté pegado al borde */
-    margin-bottom: 1em; /* Añadimos margen en la parte inferior para separar las cartas */
-    justify-content: center;
+    box-shadow: 0 3px 15px rgba(100, 100, 100, 0.5);
+    margin: 10px;
+    padding: 15px;
+    text-align: center;
 }
   
-img{
-    width: 40%;
-
+.imgCont{
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+.imgCont .img{
+    max-width: 90%;
+  
+}
+.info{
+    margin-top: 20px;
+}
+.name{
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1em;
+  }
+.types{
+    margin: 15px 0 7px;
+    letter-spacing: 1px;
+}
+.type{
+    background-color: rgba(223, 173, 109, 0.397);
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 1em; 
+    font-weight: bold;
+    font-style: italic;
 }

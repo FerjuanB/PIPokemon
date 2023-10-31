@@ -19,24 +19,26 @@ const handlePageChange = (newP)=>{
 }
     return (
     <div className={style.mCont}>
+        <Pagination page={page} setPage={handlePageChange} total={max}/>
+    <div className={''}>
      {filteredPoke.length >0  && <div className={style.contPoke}>
       {pokemonsState
        .map(u =>
-            <Pokemon 
-            key={u.id}
-            id={u.id}
-            name={u.name}
-            image={u.image}
-            attack={u.attack}
-            defense={u.defense}
-            speed={u.speed}
-            height={u.height}
-            weight={u.weight}
-            types={u.types}
-            />
+        <Pokemon 
+        key={u.id}
+        id={u.id}
+        name={u.name}
+        image={u.image}
+        attack={u.attack}
+        defense={u.defense}
+        speed={u.speed}
+        height={u.height}
+        weight={u.weight}
+        types={u.types}
+        />
         )}
       </div>}
-    <Pagination page={page} setPage={handlePageChange} total={max}/>
+    </div>
     </div>
   )
 }

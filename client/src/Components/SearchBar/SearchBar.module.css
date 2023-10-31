@@ -1,0 +1,23 @@
+.searchBar {
+    display:flex;
+    
+  }
+  .searchForm {
+    display: flex;
+    align-items: center;
+  }
+  .searchbox {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .searchButton {
+    padding: 8px 15px;
+    background-color: #0077cc;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    margin-left: 10px;
+    cursor: pointer;
+  }

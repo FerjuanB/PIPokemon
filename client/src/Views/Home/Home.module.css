@@ -1,0 +1,24 @@
+.filterM{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: bisque;
+    align-items: center;
+    border: 1px solid rgba(128, 128, 128, 0.356);
+    border-radius: 4px;
+}
+.textos {
+  font-size: 1.2em;
+  font-weight: bold;
+flex:1
+}
+.select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  flex: 1;
+margin-right:10px ;
+}
+
+.option {
+  padding: 5px; 
+}

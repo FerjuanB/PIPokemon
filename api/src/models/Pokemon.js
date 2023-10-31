@@ -27,15 +27,12 @@ module.exports = (sequelize) => {
     },
     speed:{
       type:DataTypes.FLOAT,
-      allowNull:false,
     },
     height:{
       type:DataTypes.FLOAT,
-      allowNull:false,
     },
     weight:{
       type:DataTypes.FLOAT,
-      allowNull:false,
     },
     created: {
       type: DataTypes.BOOLEAN,

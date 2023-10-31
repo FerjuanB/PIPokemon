@@ -15,18 +15,22 @@ useEffect(()=>{
 const pokemon=useSelector(state=>state.pokemon)
 console.log(pokemon)
   return (
+    <div className={style.global}>
    <div className={style.mainDiv}>
-    <img className={style.image} src={pokemon.image} alt="" />
     <Link to="/home"> {/* Enlace que te llevará de vuelta a la página "home" */}
         <button>Volver a la página principal</button>
       </Link>
-   {pokemon.name && <h1>Name: {pokemon.name}</h1>}
-   {pokemon.attack && <h1> Attack: {pokemon.attack}</h1>}
-   {pokemon.defense && <h1> Defense: {pokemon.defense}</h1>}
-   {pokemon.speed && <h1>Speed: {pokemon.speed}</h1>}
-   {pokemon.height && <h1> Height: {pokemon.height}</h1>}
-   {pokemon.weight && <h1>Weight: {pokemon.weight}</h1>}
-   <h1>Types:</h1>{pokemon.types && pokemon.types.map(p=><span>{p.name}</span>)}
+    <img className={style.image} src={pokemon.image} alt="" />
+  <div className={style.details}>
+   {pokemon.name &&    <p className={style.h1}>Name: {pokemon.name}</p>}
+   {pokemon.attack &&  <p className={style.h1}> Attack: {pokemon.attack}</p>}
+   {pokemon.defense && <p className={style.h1}> Defense: {pokemon.defense}</p>}
+   {pokemon.speed &&   <p className={style.h1}>Speed: {pokemon.speed}</p>}
+   {pokemon.height &&  <p className={style.h1}> Height: {pokemon.height}</p>}
+   {pokemon.weight &&  <p className={style.h1}>Weight: {pokemon.weight}</p>}
+   <p className={style.h1}>Types:</p>{pokemon.types && pokemon.types.map(p=><span className={style.type}>{p.name}</span>)}
+   </div>
+   </div>
    </div>
   )
 }

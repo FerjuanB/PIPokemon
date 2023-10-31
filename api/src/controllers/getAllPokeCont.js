@@ -1,7 +1,7 @@
 const axios = require("axios")
 const {Pokemon, Type}=require("../db")
-const {pokemon} = require('./pokemon')
-const URL_API='https://pokeapi.co/api/v2/pokemon/?limit=120'
+const {pokemon,URL_API} = require('./pokemon')
+
 
 
 const getPokemonsApi = async () => {

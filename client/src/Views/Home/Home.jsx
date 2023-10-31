@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PokeContainer from "../../Components/PokemonContainer/PokeContainer"
 import { getPokemons, sortAttack, sortName, filterOrigin, filterTypes, ASC, DESC, AZ, ZA, DB, API, ALL, GET_TYPES, getTypes } from "../../Redux/actions"
-
+import style from './Home.module.css'
 const Home = () => {
  
 
@@ -39,38 +39,40 @@ function onSelectChange(e){
 
   return (
     <div>
-     
-        <p className='textos'>Filters</p>
-        <div className='filters'>{/*filtros y ordenamientos.*/}
+    <div className={style.filterM}> 
+        <p className={style.textos}>Filters: {''}</p>
+        <div className={style.filters}>
             <div>
                 <label for="types">Type:</label>
-                <select id="types"onChange={onSelectChange}>
-                    <option value = {GET_TYPES}>All</option>
-                    {tipos?.map((e)=><option value={e.name} key={e.id}>
+                <select id="types" className={style.select}onChange={onSelectChange}>
+                    <option value = {GET_TYPES} className={style.option}>All</option>
+                    {tipos?.map((e)=><option value={e.name} className={style.option} key={e.id}>
                         {e.name}
                     </option>)}
                 </select>
             </div>
             </div>
-      <div>
+            <div>
                 <label for="source">Source:</label>
-                <select id="source" onChange={onSelectChange}>
-                    <option value={ALL}>All</option>
-                    <option value={DB}>My pokemons</option>
-                    <option value={API}>Existing pokemons.</option>
+                <select id="source" className={style.select}onChange={onSelectChange}>
+                    <option className={style.option} value={ALL}>All</option>
+                    <option className={style.option} value={DB}>My pokemons</option>
+                    <option className={style.option} value={API}>Existing pokemons.</option>
                 </select>
             </div>
             <div>
                 <label for="order">Order:</label>
-                <select id="order"className="OrderSelect" onChange={onSelectChange}>
-                    <option disabled selected>Default</option>
-                    <option value ={AZ}>A-Z</option>
-                    <option value ={ZA}>Z-A</option>
-                    <option value ={ASC}>Attack ᐱ</option>
-                    <option value ={DESC}>Attack ᐯ</option>
+                <select id="order" className={style.select}onChange={onSelectChange}>
+                    <option disabled selected className={style.option}>Default</option>
+                    <option value ={AZ} className={style.option}>A-Z</option>
+                    <option value ={ZA} className={style.option}>Z-A</option>
+                    <option value ={ASC}className={style.option}>Attack ᐱ</option>
+                    <option value ={DESC}className={style.option}>Attack ᐯ</option>
                 </select>
             </div>
-    <PokeContainer />
+    </div>
+
+    <div><PokeContainer /></div>
     </div>
   )
 }

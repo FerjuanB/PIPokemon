@@ -5,7 +5,6 @@
     // const pokemonId = data.id;
 
     const findPokeName = async (name)=>{
-        let api ={}
          const apiName = (await axios.get(`${URL}/${name}`)).data
          const apiNameMap=pokemon(apiName)
 
@@ -19,7 +18,6 @@
                   },
                 },
               });
-            console.log(api)
         return [apiNameMap, pokeBdd]
      
     }
