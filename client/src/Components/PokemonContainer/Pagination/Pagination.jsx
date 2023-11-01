@@ -6,6 +6,15 @@ const Pagination = ({page,setPage,total}) => {
 
     const [input,setInput]=useState(1)
 
+
+    const handleInputChange = (e) => {
+
+      const value = parseInt(e.target.value,10);
+      if(!isNaN(value) && value >=1 && value <=total && value !== input)
+     { setInput(value);
+      setPage(value)
+    }
+    }
     const nextP= ()=>{
         if(input <=total){
         setInput(input+1)
@@ -18,6 +27,8 @@ const Pagination = ({page,setPage,total}) => {
         setPage(page-1)
     }}
 
+  
+   
   return (
     <div className={style.container}>
         <button onClick={prevP}>
@@ -32,7 +43,11 @@ d="M19.2853 26.5151C19.0696 26.6273 18.8274 26.6786 18.5848 26.6636C18.3421 26.6
           />
         </svg>
         </button>
-    <input name='page' autoComplete='off' value={input}/>
+    <input 
+    autoComplete="off"
+    name='page' 
+    onChange={handleInputChange}
+    value={input}/>
     <p> de {total}</p>
     <button onClick={nextP}>
     <svg

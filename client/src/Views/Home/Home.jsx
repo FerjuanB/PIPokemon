@@ -29,7 +29,7 @@ function onSelectChange(e){
             dispatch(filterOrigin(e.target.value))
             console.log(e.target.value)
         }
-        if(tipos.some(p=> p.name === e.target.value) || e.target.value === GET_TYPES || e.target.value === ALL){ dispatch(filterTypes(e.target.value, origin))
+        if(tipos.some(p=> p.name === e.target.value) || e.target.value === GET_TYPES){ dispatch(filterTypes(e.target.value, origin))
         console.log(filterTypes(e.target.value,origin))}
             
         
@@ -42,8 +42,8 @@ function onSelectChange(e){
         <p className={style.textos}>Filters: {''}</p>
         <div className={style.filters}>
             <div>
-                <label for="types">Type:</label>
-                <select id="types" className={style.select}onChange={onSelectChange}>
+                <label htmlFor="types">Type:</label>
+                <select id="types" className={style.select}onChange={onSelectChange} >
                     <option value = {GET_TYPES} className={style.option}>All</option>
                     {tipos?.map((e)=><option value={e.name} className={style.option} key={e.id}>
                         {e.name}
