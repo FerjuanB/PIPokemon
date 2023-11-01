@@ -19,9 +19,7 @@ const Form = () => {
     type:[]
   })
 
-const[error,setError] = useState({
-  name:"El nombre es requerido"
-})
+const[error,setError] = useState({})
 
 
 
@@ -108,7 +106,7 @@ return (
 
   <form onSubmit={submitHandler} className={style.formB}>
   <h1 className={style.h1}>Crea tu propio Pokemon</h1>
-    <div className={style.nombreDiv}>
+    <div className={style.Div}>
       <label className={style.label}>Nombre:{" "}</label>
       <input
       className={style.input} 
@@ -120,7 +118,7 @@ return (
       {error.name && <span className={style.errorN}>{error.name}</span>}
     </div>
 
-    <div className={style.img}>
+    <div className={style.Div}>
       <label className={style.label}>Imagen:{" "}</label>
       <input 
       className={style.input}
@@ -133,7 +131,7 @@ return (
 
     </div>
 
-    <div className={style.ataque}>
+    <div className={style.Div}>
       <label className={style.label}>Ataque:{" "}</label>
       <input 
       className={style.input}
@@ -144,7 +142,7 @@ return (
       name="attack"/>
       {error.attack && <span className={style.errorN}>{error.attack}</span>}
     </div>
-    <div className={style.defensa}>
+    <div className={style.Div}>
       <label className={style.label}>Defensa:{" "}</label>
       <input
       className={style.input} 
@@ -155,18 +153,18 @@ return (
       name="defense"/>
       {error.defense && <span className={style.errorN}>{error.defense}</span>}
     </div>
-    <div className={style.velocidad}>
+    <div className={style.Div}>
       <label className={style.label}>Velocidad:{" "}</label>
       <input 
       className={style.input}
       type="text" 
-      placeholder="No obligatorio"
+      placeholder="Colocá un valor (max 100)"
       value={form.speed} 
       onChange={changeHandler}name="speed"/>
       {error.speed && <span className={style.errorN}>{error.speed}</span>} 
 
     </div>
-    <div className={style.altura}>
+    <div className={style.Div}>
       <label className={style.label}>Altura:{" "}</label>
       <input 
       className={style.input}
@@ -178,7 +176,7 @@ return (
       {error.height && <span className={style.errorN}>{error.height}</span>} 
 
     </div>
-    <div className={style.peso}>
+    <div className={style.Div}>
       <label>Peso:{" "}</label>
       <input 
       className={style.input}
@@ -190,7 +188,7 @@ return (
       {error.weight && <span className={style.errorN}>{error.weight}</span>} 
 
     </div> 
-    <div className={style.tipos}>
+    <div className={style.Div}>
   <label>Tipos:{" "}</label>
   <select
   className={style.select}

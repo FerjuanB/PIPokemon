@@ -15,7 +15,7 @@ export const ALL = 'ALL'
 export const SORTATTACK = 'SORTATTACK'
 export const SORTNAME = 'SORTNAME'
 export const FILTERORIGIN = 'FILTER_ORIGIN'
-export const FILTERTYPES = 'FILTER_TYPES'
+export const FILTER_TYPES = 'FILTER_TYPES'
 ;
 
     export const getPokemons = () =>{
@@ -83,7 +83,7 @@ export const FILTERTYPES = 'FILTER_TYPES'
     
     export function filterTypes(type, origin){
         return{
-            type:FILTERTYPES,
+            type:FILTER_TYPES,
             payload:type,
             data:origin
         
