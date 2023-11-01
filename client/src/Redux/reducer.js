@@ -64,11 +64,12 @@ const rootReducer=(state=initialState,{type,payload,data})=>{
         case FILTER_TYPES:
             let filteredTypes = []
             console.log(data)
-            if(data === API){
+            if(data === API ){
                 filteredTypes= payload === GET_TYPES? state.pokemons.filter(el=>el.created ===false): state.pokemons.filter(p=> p.types.some(t =>t.name === payload) && p.created===false)
-                    }   else if(data === DB){
+                    }   else if(data === DB ){
                 filteredTypes= payload === GET_TYPES? state.pokemons.filter(p=>p.created===true):state.pokemons.filter(p=> p.types.some(t =>t.name === payload) && p.created===true)}
-                else if(data === ALL || data === undefined){filteredTypes= state.pokemons.filter(p=> p.types.some(t =>t.name === payload)) }
+                else if((data === GET_TYPES || data === ALL||data === undefined)){filteredTypes= payload === GET_TYPES || payload === ALL? state.pokemons : state.pokemons.filter(p=> p.types.some(t =>t.name === payload)) }
+                
                                 console.log(filteredTypes)
    
                 return{

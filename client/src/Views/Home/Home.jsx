@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PokeContainer from "../../Components/PokemonContainer/PokeContainer"
-import { sortAttack, sortName, filterOrigin, filterTypes, ASC, DESC, AZ, ZA, DB, API, ALL, getTypes, GET_TYPES, getPokemons } from "../../Redux/actions"
+import { sortAttack, sortName, filterOrigin, filterTypes, ASC, DESC, AZ, ZA, DB, API, ALL, getTypes, GET_TYPES} from "../../Redux/actions"
 import style from './Home.module.css'
 const Home = () => {
  
@@ -15,9 +15,7 @@ const [origin,setOrigin]=useState()
   useEffect(()=>{
     dispatch(getTypes())
   },[dispatch])
-  useEffect(()=>{
-    dispatch(getPokemons())
-  },[dispatch])
+ 
 function onSelectChange(e){
         e.preventDefault()
         if(e.target.value === ASC || e.target.value === DESC){
