@@ -1,2 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400&display=swap');
 
+
+:root {
+    --font-lato: 'Lato', sans-serif;
+  }
+.landing{
+        background-color: black;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .logo{
+       width: 40%;
+
+    }
+    .title{
+        font-family: var(--font-lato);
+        font-style: oblique;
+        font-size:3.3rem;
+     text-align: center;
+        color: #f4a261;
+    }
+
+ 

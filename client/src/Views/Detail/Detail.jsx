@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import { getPokemonsId } from "../../Redux/actions"
 import style from './Detail.module.css'
+import { clearPokemon } from "../../Redux/actions"
 
 
 const Detail = () => {
@@ -14,11 +15,15 @@ useEffect(()=>{
 },[dispatch,id])
 const pokemon=useSelector(state=>state.pokemon)
 console.log(pokemon)
+
+const clearDetail = ()=>{
+dispatch(clearPokemon())
+}
   return (
     <div className={style.global}>
    <div className={style.mainDiv}>
-    <Link to="/home"> {/* Enlace que te llevará de vuelta a la página "home" */}
-        <button>Volver a la página principal</button>
+    <Link to="/home"> 
+        <button onClick={clearDetail}>Volver a la página principal</button>
       </Link>
     <img className={style.image} src={pokemon.image} alt="" />
   <div className={style.details}>

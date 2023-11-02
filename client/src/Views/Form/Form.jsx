@@ -1,11 +1,11 @@
 
 import axios from "axios"
 import { useState, useEffect } from "react"
-import { getTypes } from "../../Redux/actions"
+import {  getTypes } from "../../Redux/actions"
 import { useDispatch,useSelector } from "react-redux"
 import style from './Form.module.css'
 import validation from "./validation"
-
+import {useNavigate} from "react-router-dom"
 const Form = () => {
 
   const [form,setForm] = useState({
@@ -28,12 +28,14 @@ const[error,setError] = useState({})
 const changeHandler = (e)=>{
 const property = e.target.name;
 const value = e.target.value;
+
 setForm((prev)=>{
 const newS = {
   ...prev,
-  [property]:value
+  [property]:value,
+  
 };
-setError(validation(newS));
+setError(validation(newS, pokemons));
 return newS;
 }); 
 }
@@ -47,7 +49,7 @@ const changeTypesHandler = (t) => {
        };
        setError(validation(newS))
        return newS 
-      });
+      }); 
    }else{
      alert("Máximo 2 tipos por Pokemon!")
      
@@ -69,16 +71,19 @@ const changeTypesHandler = (t) => {
 const dispatch = useDispatch();
 useEffect(()=>{
 dispatch(getTypes())
+// dispatch(getPokemons())
 },[dispatch])
 const types = useSelector(state=>state.types)
+const pokemons = useSelector(state=>state.pokemons)
 
 
+const navigate = useNavigate()
 
 const submitHandler = (e)=>{
   e.preventDefault()
-  if(error.name|| error.image|| error.attack|| error.defense|| error.type)
+  if(error.name|| error.image|| error.attack|| error.defense || error.speed||error.height||error.weight|| error.type)
   {
-    alert("Debés completar los campos Nombre, Imagen, Ataque, Defensa, Tipos, antes de crear un nuevo Pokemon")
+    alert("Debés completar los campos Nombre, Imagen, Ataque, Defensa, Velocidad, Peso, Altura  Tipos, antes de crear un nuevo Pokemon")
     return;
   }
   alert(`seguro que quiere crear el pokemon ${form.name}?`)
@@ -87,7 +92,9 @@ const submitHandler = (e)=>{
   .then(res=>
     {
       alert(`Pokemon ${form.name} creado exitosamente!`)
-     setForm({
+    
+    navigate('/home')
+      setForm({
         name: "",
         image: "",
         attack: "",
@@ -95,7 +102,8 @@ const submitHandler = (e)=>{
         speed: "",
         height: "",
         weight: "",
-        type: []
+        type: [],
+        isName:false 
       });})
   .catch(err=>alert(err))
 }

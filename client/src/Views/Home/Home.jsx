@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PokeContainer from "../../Components/PokemonContainer/PokeContainer"
-import { sortAttack, sortName, filterOrigin, filterTypes, ASC, DESC, AZ, ZA, DB, API, ALL, getTypes, GET_TYPES} from "../../Redux/actions"
+import { sortAttack, sortName, filterOrigin, filterTypes, getTypes} from "../../Redux/actions"
+import { ASC,DESC,AZ,ZA,DB,API,ALL,GET_TYPES } from "../../Redux/selector"
 import style from './Home.module.css'
 const Home = () => {
  

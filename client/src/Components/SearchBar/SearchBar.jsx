@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { getPokemonsName,getPokemons } from '../../Redux/actions'
+import { getPokemonsName,getPokemons, setPage } from '../../Redux/actions'
 import {useDispatch} from 'react-redux'
 import style from './SearchBar.module.css'
 const SearchBar = () => {
@@ -20,6 +20,7 @@ const onSearchChange =(e)=>{
   } else {
     dispatch(getPokemonsName(searchValue)) 
   }
+  dispatch(setPage(1))
 
 }
 
@@ -27,8 +28,8 @@ const onSearchChange =(e)=>{
   return (
     <div className={style.searchBar}>
     <form onSubmit={onSearch}  className={style.searchForm}>
-      <input className={style.searchbox} placeholder= "Insert an exact name..." type="search" onChange={onSearchChange}/>
-      <input type="submit" value="Search" className={style.searchButton}/>
+      <input className={style.searchbox} placeholder= "Search a Pokemon..." type="search" onChange={onSearchChange} />
+      {/* <input type="submit" value="Search" className={style.searchButton}/> */}
     </form>
     </div>
   )

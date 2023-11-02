@@ -47,7 +47,7 @@ d="M19.2853 26.5151C19.0696 26.6273 18.8274 26.6786 18.5848 26.6636C18.3421 26.6
     autoComplete="off"
     name='page' 
     onChange={handleInputChange}
-    value={input}/>
+    value={page}/>
     <p> de {total}</p>
     <button onClick={nextP}>
     <svg
