@@ -5,6 +5,7 @@ import {  getTypes } from "../../Redux/actions"
 import { useDispatch,useSelector } from "react-redux"
 import style from './Form.module.css'
 import validation from "./validation"
+import { getPokemons } from "../../Redux/actions"
 import {useNavigate} from "react-router-dom"
 const Form = () => {
 
@@ -23,6 +24,20 @@ const[error,setError] = useState({})
 
 
 
+const dispatch = useDispatch();
+
+useEffect(()=>{
+  dispatch(getTypes())
+  dispatch(getPokemons())
+  },[dispatch])
+  const types = useSelector(state=>state.types)
+  const pokemons = useSelector(state=>state.pokemons) 
+
+const isName = (name)=> {
+ if (pokemons.some(p=>p.name=== name)){
+  return true;
+ }
+}
 
 
 const changeHandler = (e)=>{
@@ -33,13 +48,12 @@ setForm((prev)=>{
 const newS = {
   ...prev,
   [property]:value,
-  
 };
-setError(validation(newS, pokemons));
+
+setError(validation(newS));
 return newS;
 }); 
 }
-
 const changeTypesHandler = (t) => {
   if (form.type.length < 2) {
      setForm((prevS) => {
@@ -68,25 +82,26 @@ const changeTypesHandler = (t) => {
  
 
 //*manejo de los types desde el estado global. 
-const dispatch = useDispatch();
-useEffect(()=>{
-dispatch(getTypes())
-// dispatch(getPokemons())
-},[dispatch])
-const types = useSelector(state=>state.types)
-const pokemons = useSelector(state=>state.pokemons)
 
 
+// pokemons.some(p=>p.name.toLowerCase()=== form.name.toLowerCase())?setError(error.name = "Ese nombre ya existe! Elige un nombre diferente"):setError({})
 const navigate = useNavigate()
-
+console.log(form.name)
 const submitHandler = (e)=>{
   e.preventDefault()
+  
+  
+  if(isName(form.name)){
+    alert("Ya hay un pokemon con ese nombre!");
+    return;
+  }
+  
   if(error.name|| error.image|| error.attack|| error.defense || error.speed||error.height||error.weight|| error.type)
   {
     alert("Debés completar los campos Nombre, Imagen, Ataque, Defensa, Velocidad, Peso, Altura  Tipos, antes de crear un nuevo Pokemon")
     return;
   }
-  alert(`seguro que quiere crear el pokemon ${form.name}?`)
+  if(!confirm(`seguro que quiere crear el pokemon ${form.name}?`))return
 
   axios.post("http://localhost:3001/pokemons",form)
   .then(res=>
@@ -129,6 +144,7 @@ return (
     <div className={style.Div}>
       <label className={style.label}>Imagen:{" "}</label>
       <input 
+      autoComplete="off"
       className={style.input}
       type="text" 
       value={form.image} 

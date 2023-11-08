@@ -3,22 +3,40 @@ const {Pokemon, Type}=require("../db")
 const {pokemon,URL_API} = require('./pokemon')
 
 
-
+const pokemons = [];
 const getPokemonsApi = async () => {
+
+if(pokemons.length>0){
+  return pokemons
+}
+
   try {
-    const pokemonsInfoApi = await axios.get(`${URL_API}`);
+    const res = await axios.get(`${URL_API}`);
+    const pokemonUrls = res.data.results.map(p => p.url);
 
-    const pokemonUrls = pokemonsInfoApi.data.results.map((p) => p.url);
+    for(let url of pokemonUrls) {
+      const pokemonRes = (await axios.get(url)).data; 
 
-    const pokemonApiResponses = await Promise.all(pokemonUrls.map((url) => axios.get(url)));
+      pokemons.push(pokemon(pokemonRes));
+    }
 
-    const cleanedPokemonData = pokemonApiResponses.map((response) => pokemon(response.data));
+  } catch(err) {
+    throw new Error(`Error al obtener datos de la API: ${error.message}`)  }
 
-    return cleanedPokemonData;
-  } catch (error) {
-    throw new Error(`Error al obtener datos de la API: ${error.message}`);
-  }
-};
+  return pokemons;
+}
+
+
+//*esto funciona pero despues de determinados llamados, se rompe. corregido en la defensa del PI.
+    // const pokemonsInfoApi = await axios.get(`${URL_API}`);
+
+    // const pokemonUrls = await pokemonsInfoApi.data.results.map((p) => p.url);
+
+    // const pokemonApiResponses = await Promise.all(pokemonUrls.map((url) => axios.get(url)));
+
+    // const cleanedPokemonData = await pokemonApiResponses.map((response) => pokemon(response.data));
+    // return cleanedPokemonData;
+   
 
 const getPokemonsDB = async () => {
   try {
@@ -31,83 +49,23 @@ const getPokemonsDB = async () => {
         },
       },
     });
-
     return pokemonsDB;
   } catch (error) {
+    console.log("error en DB",error)
     throw new Error(`Error al obtener datos de la base de datos: ${error.message}`);
   }
 };
 
 const getAllPokemons = async () => {
   try {
-    const [pokemonApiData, pokemonDBData] = await Promise.all([getPokemonsApi(), getPokemonsDB()]);
-    return [...pokemonDBData,...pokemonApiData];
+    const [db, api] = await Promise.all([getPokemonsDB(), getPokemonsApi()]);
+    return [...db, ...api]; 
   } catch (error) {
     throw new Error({ error: error.message });
   }
 };
 
 
-
-
-
-
-
-
-
-
-// // ?traer los pokemon de la base de datos, y si hay algun error lanzar un error a traves de un try-catch. 
-// const allPokemon = ()=>{
-// const findPokeApi = async()=>{
-
-//   try{
-//     const pokeApi = await axios.get(URL_API)
-//     const pokemon = await Promise.all(
-//       pokeApi.data.results.map(async (p) => {
-//         const { data } = await axios.get(p.url);
-//        //?hacer un map sobre los types existentes y poder guardarlos en la propiedad "type"
-//         const types = data.types.map((type, index) => ({
-//           [index + 1]: type.type.name,
-//       }));
-//         return {
-//           id: data.id,
-//           name: data.name,
-//           image: data.sprites.other.home.front_default,
-//           attack: data.stats[1].base_stat,
-//           defense: data.stats[2].base_stat,
-//           speed: data.stats[5].base_stat,
-//           height: data.height,
-//           weight: data.weight,
-//           type:Object.assign({},...types),
-//           created:false
-//         };
-//       })
-//     );
-//     return pokemon
-//   }
-//   catch{
-//     throw new Error (`el sitio pokeapi.co no puede traer los datos dado que sucede ${error.message}`)
-//   }
-// }
-
-// //!traer los pokemon de la base de datos a traves de una funcion que será llamada luego. 
-// const pokeBdd = async() =>{
-//   try {
-//     const pikachu = await Pokemon.findAll({
-//       include:{
-//         model:Type,
-//         attributes:["name"],
-//         through:{attributes:[]}
-//       }}
-//     );
-//     return pikachu
-//   } catch (error) {
-//     throw new Error (`la base de datos tiene el error:${error.message}`)
-//   }
-// }
-
-// return [findPokeApi,pokeBdd]
-// }
 
 
 

@@ -27,12 +27,12 @@ const rootReducer=(state=initialState,{type,payload,data})=>{
         case SET_PAGE:
             return {...state,page:payload}
         case SORTATTACK:
-            let orderedAttack = payload === ASC? state.pokemons.sort(function(a,b){
+            let orderedAttack = payload === ASC? state.filteredPoke.sort(function(a,b){
             if(a.attack > b.attack) return 1;
             if(a.attack < b.attack) return -1;
             return 0
             }) : 
-            state.pokemons.sort(function(a,b){
+            state.filteredPoke.sort(function(a,b){
                 if(a.attack > b.attack) return -1;
                 if(a.attack < b.attack) return 1;
                 return 0
@@ -42,11 +42,11 @@ const rootReducer=(state=initialState,{type,payload,data})=>{
                 ...state,filteredPoke: orderedAttack}
     
         case SORTNAME:
-                let orderedName = payload === AZ? state.pokemons.sort(function(a, b){
+                let orderedName = payload === AZ? state.filteredPoke.sort(function(a, b){
                     if (a.name.toLowerCase()>b.name.toLowerCase()) return 1;
                     if (a.name.toLowerCase()<b.name.toLowerCase()) return -1;
                     return 0
-                }) : state.pokemons.sort(function(a, b){
+                }) : state.filteredPoke.sort(function(a, b){
                     if (a.name.toLowerCase()>b.name.toLowerCase()) return -1;
                     if (a.name.toLowerCase()<b.name.toLowerCase()) return 1;
                     return 0
@@ -68,7 +68,6 @@ const rootReducer=(state=initialState,{type,payload,data})=>{
         
         case FILTER_TYPES:
             let filteredTypes = []
-            console.log(data)
             if(data === API ){
                 filteredTypes= payload === GET_TYPES? state.pokemons.filter(el=>el.created ===false): state.pokemons.filter(p=> p.types.some(t =>t.name === payload) && p.created===false)
         }   else if(data === DB ){

@@ -1,18 +1,19 @@
 
-export default function validation(state, pokemons){
+export default function validation(state){
   const errors = {};
   
- console.log(state,pokemons)
+ console.log(state.name)
 
 
 if(!state.name){
   errors.name= 'El campo nombre debe ser completado.';
 }else if(!/^[a-z0-9]+$/i.test(state.name)){
   errors.name= 'Nombre puede llevar sólo letras y números y sin espacios.'
-}else if(
-  pokemons.some(p => p.name.toLowerCase() === state.name.toLowerCase())){
-errors.name='Ese nombre ya existe! Elige un nombre diferente'
 }
+// else if(
+//   pokemons.some(p => p.name.toLowerCase() === state.name.toLowerCase())){
+// errors.name='Ese nombre ya existe! Elige un nombre diferente'
+//   }
 
 
 if(!state.image){

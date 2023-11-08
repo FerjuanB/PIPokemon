@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import style from "./Pagination.module.css"
 
 
@@ -26,7 +26,9 @@ const Pagination = ({page,setPage,total}) => {
         setInput(input-1)
         setPage(page-1)
     }}
-
+useEffect(()=>{
+setPage(1)
+},[total])
   
    
   return (

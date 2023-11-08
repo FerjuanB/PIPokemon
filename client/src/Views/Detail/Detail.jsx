@@ -1,42 +1,57 @@
-import { useEffect} from "react"
+import { useEffect, useState} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useParams } from "react-router-dom"
 import { getPokemonsId } from "../../Redux/actions"
 import style from './Detail.module.css'
 import { clearPokemon } from "../../Redux/actions"
-
+import loadingG from './loading.gif'
 
 const Detail = () => {
 const {id} = useParams()
 const dispatch = useDispatch()
+const [loading, setLoading] = useState(true);
+
 
 useEffect(()=>{
-  dispatch(getPokemonsId(id))
+  dispatch(getPokemonsId(id)).then(()=>{
+    setLoading(false)
+  })
 },[dispatch,id])
 const pokemon=useSelector(state=>state.pokemon)
-console.log(pokemon)
 
 const clearDetail = ()=>{
 dispatch(clearPokemon())
 }
-  return (
-    <div className={style.global}>
-   <div className={style.mainDiv}>
+return (
+  <div className={style.main}>
+{loading?
+(
+<div>
+<img src={loadingG} alt="Loading"/> 
+</div>
+):(
+  <div>
+<div className={style.mainDiv}>
     <Link to="/home"> 
-        <button onClick={clearDetail}>Volver a la página principal</button>
+        <button onClick={clearDetail}className={style.button}>Volver a la página principal</button>
       </Link>
-    <img className={style.image} src={pokemon.image} alt="" />
-  <div className={style.details}>
-   {pokemon.name &&    <p className={style.h1}>Name: {pokemon.name}</p>}
-   {pokemon.attack &&  <p className={style.h1}> Attack: {pokemon.attack}</p>}
-   {pokemon.defense && <p className={style.h1}> Defense: {pokemon.defense}</p>}
-   {pokemon.speed &&   <p className={style.h1}>Speed: {pokemon.speed}</p>}
-   {pokemon.height &&  <p className={style.h1}> Height: {pokemon.height}</p>}
-   {pokemon.weight &&  <p className={style.h1}>Weight: {pokemon.weight}</p>}
-   <p className={style.h1}>Types:</p>{pokemon.types && pokemon.types.map(p=><span className={style.type}>{p.name}</span>)}
+  </div>
+
+   <img className={style.image} src={pokemon.image} alt="" key={pokemon.id} />
+  <section className={style.details}>
+   {pokemon.name &&    <h2 className={style.h1}>Name: {pokemon.name}</h2>}
+   {pokemon.attack &&  <h2 className={style.h1}> Attack: {pokemon.attack}</h2>}
+   {pokemon.defense && <h2 className={style.h1}> Defense: {pokemon.defense}</h2>}
+   {pokemon.speed &&   <h2 className={style.h1}>Speed: {pokemon.speed}</h2>}
+   {pokemon.height &&  <h2 className={style.h1}> Height: {pokemon.height}</h2>}
+   {pokemon.weight &&  <h2 className={style.h1}>Weight: {pokemon.weight}</h2>}
+   <h2 className={style.h1}>Types:</h2>{pokemon.types && pokemon.types.map(p=><h3 className={style.type}>{p.name}</h3>)}
+   </section>
    </div>
+ )}
+
    </div>
-   </div>
+   
   )
 }
 
